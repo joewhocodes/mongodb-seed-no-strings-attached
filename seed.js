@@ -52,8 +52,9 @@ const createUserComments = id => {
     let userComments = [];
     for (let i = 0; i < randomNumGenerator(1, 20); i++) {
         let randomNum = randomNumGenerator(1, 78)
-        let randomSentence = faker.lorem.sentence;
         let randomFriend = userIds[randomNum];
+        // console.log(`user is 2 is ${userIds[2].name}`)
+        console.log(`friend is ${randomFriend.name}`)
         userComments.push({
             commendId: nanoid(), 
             firstName: randomFriend.name,
@@ -93,7 +94,7 @@ async function seedData() {
         const _id = userIds[i].id;
         const firstName = faker.person.firstName('female');
         const email = faker.internet.email();
-        const password = faker.password.password({ length: 15 });
+        const password = faker.internet.password({ length: 15 });
         const profileImg = 'https://xsgames.co/randomusers/avatar.php?g=female';
         const location = randomCity;
         const instruments = createUserInstruments();
