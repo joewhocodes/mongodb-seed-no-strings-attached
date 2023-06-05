@@ -40,7 +40,8 @@ const createUserFriends = id => {
     let friends = userIds.filter(user => user !== id);
 
     for (let i = 0; i < randomNumGenerator(0, 50); i++) {
-        let randomNum = randomNumGenerator(1, 78);
+        let randomNum = randomNumGenerator(1, 76);
+        console.log(`friend is ${randomNum}`)
         userFriends.push(friends[randomNum].id);
     }
     return userFriends;
@@ -49,8 +50,11 @@ const createUserFriends = id => {
 const createUserComments = id => {
     let userComments = [];
     for (let i = 0; i < randomNumGenerator(1, 20); i++) {
-        let randomNum = randomNumGenerator(1, 78);
+        let randomNum = randomNumGenerator(1, 76);
         let randomFriend = userIds[randomNum];
+
+        console.log(`create user comments friend is ${randomFriend}`)
+
         userComments.push({
             commendId: nanoid(),
             firstName: randomFriend.name,
@@ -62,6 +66,8 @@ const createUserComments = id => {
     return userComments;
 };
 
+console.log(` length = ${userIds.length}`)
+
 // console.log(userIds[5])
 // console.log(createUserComments())
 // console.log(` keys are ${Object.values(userIds[0])}`)
@@ -70,7 +76,7 @@ async function seedData() {
     // Connection URL
     const uri =
         'mongodb+srv://joewhocodes:d0rEpl7yGtVz6Xj3@no-strings-attached.rmgvc1s.mongodb.net/no-strings-attached?retryWrites=true&w=majority';
-    const seed_count = 3;
+    const seed_count = 30;
     mongoose.set('strictQuery', false);
     await mongoose
         .connect(uri, {
