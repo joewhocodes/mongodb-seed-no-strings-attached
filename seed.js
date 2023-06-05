@@ -96,7 +96,7 @@ async function seedData() {
         const firstName = faker.person.firstName('female');
         const email = faker.internet.email();
         const password = faker.internet.password({ length: 15 });
-        const profileImg = 'https://xsgames.co/randomusers/avatar.php?g=female';
+        const profileImg = usersIds[i].profileImg;
         const location = randomCity;
         const instruments = createUserInstruments();
         const friends = createUserFriends(_id);
