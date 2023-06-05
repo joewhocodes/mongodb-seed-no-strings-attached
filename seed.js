@@ -4,15 +4,15 @@ const mongoose = require('mongoose');
 const Product = require('./model');
 const cities = require('./cities');
 const userIds = require('./userIds');
-const { nanoid } = require('nanoid')
+const { nanoid } = require('nanoid');
 
 const randomCity = cities[Math.floor(Math.random() * cities.length)];
 
-const randomNumGenerator = (minimum, maximum) => { 
+const randomNumGenerator = (minimum, maximum) => {
     const min = Math.ceil(minimum);
     const max = Math.floor(maximum);
-    return randomNum = Math.floor(Math.random() * (max - min) + min);
-}
+    return (randomNum = Math.floor(Math.random() * (max - min) + min));
+};
 
 const createUserInstruments = () => {
     let instrument = ['Guitar', 'Bass', 'Vocals', 'Keyboard', 'Drums'];
@@ -35,37 +35,32 @@ const createUserInstruments = () => {
     return userInstruments;
 };
 
-const createUserFriends = (id) => {
+const createUserFriends = id => {
     let userFriends = [];
     let friends = userIds.filter(user => user !== id);
-    
+
     for (let i = 0; i < randomNumGenerator(0, 50); i++) {
-        let randomNum = randomNumGenerator(1, 78)
+        let randomNum = randomNumGenerator(1, 78);
         userFriends.push(friends[randomNum].id);
     }
     return userFriends;
 };
 
-
-
 const createUserComments = id => {
     let userComments = [];
     for (let i = 0; i < randomNumGenerator(1, 20); i++) {
-        let randomNum = randomNumGenerator(1, 78)
+        let randomNum = randomNumGenerator(1, 78);
         let randomFriend = userIds[randomNum];
-        // console.log(`user is 2 is ${userIds[2].name}`)
-        console.log(`friend is ${randomFriend.name}`)
         userComments.push({
-            commendId: nanoid(), 
+            commendId: nanoid(),
             firstName: randomFriend.name,
             profileImg: randomFriend.profileImg,
             comment: faker.lorem.sentence({ min: 3, max: 10 }),
             userId: randomFriend.id,
-        })
-        
+        });
     }
     return userComments;
-}
+};
 
 // console.log(userIds[5])
 // console.log(createUserComments())
@@ -101,7 +96,18 @@ async function seedData() {
         const friends = createUserFriends(_id);
         const comments = createUserComments(_id);
         const bio = faker.person.bio();
-        timeSeriesData.push({ name, price });
+        timeSeriesData.push({
+            _id,
+            firstName,
+            email,
+            password,
+            profileImg,
+            location,
+            instruments,
+            friends,
+            comments,
+            bio,
+        });
     }
 
     const seedDB = async () => {
