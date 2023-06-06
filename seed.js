@@ -39,9 +39,8 @@ const createUserFriends = id => {
     let userFriends = [];
     let friends = userIds.filter(user => user !== id);
 
-    for (let i = 0; i < randomNumGenerator(0, 50); i++) {
-        let randomNum = randomNumGenerator(1, 76);
-        console.log(`friend is ${randomNum}`)
+    for (let i = 1; i < randomNumGenerator(3, 20); i++) {
+        let randomNum = randomNumGenerator(1, 30);
         userFriends.push(friends[randomNum].id);
     }
     return userFriends;
@@ -50,10 +49,8 @@ const createUserFriends = id => {
 const createUserComments = id => {
     let userComments = [];
     for (let i = 0; i < randomNumGenerator(1, 20); i++) {
-        let randomNum = randomNumGenerator(1, 76);
+        let randomNum = randomNumGenerator(1, 30);
         let randomFriend = userIds[randomNum];
-
-        console.log(`create user comments friend is ${randomFriend}`)
 
         userComments.push({
             commendId: nanoid(),
@@ -65,12 +62,6 @@ const createUserComments = id => {
     }
     return userComments;
 };
-
-console.log(` length = ${userIds.length}`)
-
-// console.log(userIds[5])
-// console.log(createUserComments())
-// console.log(` keys are ${Object.values(userIds[0])}`)
 
 async function seedData() {
     // Connection URL
@@ -96,7 +87,7 @@ async function seedData() {
         const firstName = faker.person.firstName('female');
         const email = faker.internet.email();
         const password = faker.internet.password({ length: 15 });
-        const profileImg = usersIds[i].profileImg;
+        const profileImg = userIds[i].profileImg;
         const location = randomCity;
         const instruments = createUserInstruments();
         const friends = createUserFriends(_id);
