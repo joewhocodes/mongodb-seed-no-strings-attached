@@ -84,7 +84,7 @@ async function seedData() {
     let timeSeriesData = [];
     for (let i = 0; i < seed_count; i++) {
         const _id = userIds[i].id;
-        const firstName = faker.person.firstName('female');
+        const firstName = userIds[i].name;
         const email = faker.internet.email();
         const password = faker.internet.password({ length: 15 });
         const profileImg = userIds[i].profileImg;

@@ -12,10 +12,11 @@ function createFromPattern (pattern) {
 const idNameGenerator = () => {
     let userIds = [];
     for (let i = 1; i < 78; i++) {
-        let img = `https://xsgames.co/randomusers/assets/avatars/female/${i}.jpg`
+        const gender = faker.person.sex();
+        const img = `https://xsgames.co/randomusers/assets/avatars/${gender}/${i}.jpg`
         userIds.push({
             id: createFromPattern('xxxxxxxxxx'),
-            name: faker.person.firstName('female'),
+            name: faker.person.firstName(gender),
             profileImg: img
         })
     }
