@@ -6,7 +6,7 @@ const cities = require('./cities');
 const userIds = require('./userIds');
 const { nanoid } = require('nanoid');
 
-const randomCity = cities[Math.floor(Math.random() * cities.length)];
+const createUserCity = () => cities[Math.floor(Math.random() * cities.length)];
 
 const randomNumGenerator = (minimum, maximum) => {
     const min = Math.ceil(minimum);
@@ -40,7 +40,7 @@ const createUserFriends = id => {
     let friends = userIds.filter(user => user !== id);
 
     for (let i = 1; i < randomNumGenerator(3, 20); i++) {
-        let randomNum = randomNumGenerator(1, 30);
+        let randomNum = randomNumGenerator(1, 60);
         userFriends.push(friends[randomNum].id);
     }
     return userFriends;
@@ -48,8 +48,8 @@ const createUserFriends = id => {
 
 const createUserComments = id => {
     let userComments = [];
-    for (let i = 0; i < randomNumGenerator(1, 20); i++) {
-        let randomNum = randomNumGenerator(1, 30);
+    for (let i = 0; i < randomNumGenerator(2, 20); i++) {
+        let randomNum = randomNumGenerator(1, 60);
         let randomFriend = userIds[randomNum];
 
         userComments.push({
@@ -67,7 +67,7 @@ async function seedData() {
     // Connection URL
     const uri =
         'mongodb+srv://joewhocodes:d0rEpl7yGtVz6Xj3@no-strings-attached.rmgvc1s.mongodb.net/no-strings-attached?retryWrites=true&w=majority';
-    const seed_count = 30;
+    const seed_count = 60;
     mongoose.set('strictQuery', false);
     await mongoose
         .connect(uri, {
@@ -88,7 +88,7 @@ async function seedData() {
         const email = faker.internet.email();
         const password = faker.internet.password({ length: 15 });
         const profileImg = userIds[i].profileImg;
-        const location = randomCity;
+        const location = createUserCity();
         const instruments = createUserInstruments();
         const friends = createUserFriends(_id);
         const comments = createUserComments(_id);
